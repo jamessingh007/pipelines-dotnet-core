@@ -36,15 +36,10 @@ steps:
     publishWebProjects: True
     arguments: '--configuration $(BuildConfiguration) --output $(Build.ArtifactStagingDirectory)'
     zipAfterPublish: True
-- task: AzureRmWebAppDeployment@4
+- task: AzureWebApp@1
   inputs:
-    ConnectionType: 'AzureRM'
     azureSubscription: 'Pay-As-You-Go(1)(5af352d4-45f3-4d33-9950-156fbfbc1f93)'
     appType: 'webApp'
-    WebAppName: 'webappsusingcicd'
-    deployToSlotOrASE: true
-    ResourceGroupName: 'cicd_demo'
-    SlotName: 'production'
-    packageForLinux: '$(System.DefaultWorkingDirectory)/**/*.zip'
-    enableCustomDeployment: true
-    DeploymentType: 'webDeploy'
+    appName: 'webappsusingcicd'
+    package: '$(System.DefaultWorkingDirectory)/**/*.zip'
+    deploymentMethod: 'auto'
