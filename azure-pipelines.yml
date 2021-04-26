@@ -36,10 +36,10 @@ steps:
     publishWebProjects: True
     arguments: '--configuration $(BuildConfiguration) --output $(Build.ArtifactStagingDirectory)'
     zipAfterPublish: True
-- task: AzureWebApp@1
+- task: AzureRmWebAppDeployment@4
   inputs:
+    ConnectionType: 'AzureRM'
     azureSubscription: 'Pay-As-You-Go(1)(5af352d4-45f3-4d33-9950-156fbfbc1f93)'
     appType: 'webApp'
-    appName: 'webappsusingcicd'
-    package: '$(System.DefaultWorkingDirectory)/**/*.zip'
-    deploymentMethod: 'auto'
+    WebAppName: 'webappsusingcicd'
+    packageForLinux: '$(Build.ArtifactStagingDirectory)/**/*.zip'
